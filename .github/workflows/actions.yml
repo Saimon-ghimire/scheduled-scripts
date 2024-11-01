@@ -41,6 +41,7 @@ jobs:
 
       - name: Pull Latest Changes
         run: |
+          git config pull.rebase false 
           git pull origin master # Adjust 'main' if your default branch is named differently
   
       - name: Commit and Push CSV Files
