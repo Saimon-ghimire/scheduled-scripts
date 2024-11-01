@@ -7,11 +7,8 @@ from datetime import date
 import pandas as pd
 import os
 
-file=open('temp','a')
-file.write('apple')
-file.close()
 # For cron job
-os.environ["PATH"] += ":/usr/local/bin/"
+# os.environ["PATH"] += ":/usr/local/bin/"
 
 options = Options()
 options.add_argument("--headless")
