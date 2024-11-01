@@ -2,7 +2,7 @@ name: Run Python Script and Save CSV
 
 on:
   schedule:
-    - cron: '22 11 * * *'  # Runs every day at midnight (adjust as needed)
+    - cron: '43 11 * * *'  # Runs every day at midnight (adjust as needed)
   workflow_dispatch:
 
 jobs:
@@ -37,7 +37,12 @@ jobs:
         env:
           DISPLAY: ":99"  # Needed for headless browsers
         run: python main.py
+      
 
+      - name: Pull Latest Changes
+        run: |
+          git pull origin main  # Adjust 'main' if your default branch is named differently
+  
       - name: Commit and Push CSV Files
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Use the GitHub token
