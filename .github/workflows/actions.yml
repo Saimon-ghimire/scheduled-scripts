@@ -2,7 +2,7 @@ name: Daily Job
 
 on:
   schedule:
-    - cron: '0 15 * * *'  # Runs every day at midnight
+    - cron: '*/2 * * * *'  # Runs every day at midnight
 
 jobs:
   build:
@@ -15,7 +15,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v2
         with:
-          python-version: '3.x'
+          python-version: '3.9'
 
       - name: Install dependencies
         run: pip install -r requirements.txt
@@ -27,6 +27,7 @@ jobs:
         run: |
           git config --local user.name "GitHub Actions"
           git config --local user.email "actions@github.com"
+
           git add "$(dirname main.py)/$(date +%F).csv"  # Adjust the script path accordingly
           git commit -m "Add generated price data for $(date +%F)" || echo "No changes to commit"
           git push
