@@ -1,0 +1,35 @@
+name: Daily Job
+
+on:
+  schedule:
+    - cron: '0 15 * * *'  # Runs every day at midnight
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.x'
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run script
+        run: python main.py
+
+      - name: Commit and push changes
+        run: |
+          git config --local user.name "GitHub Actions"
+          git config --local user.email "actions@github.com"
+          git add "$(dirname main.py)/$(date +%F).csv"  # Adjust the script path accordingly
+          git commit -m "Add generated price data for $(date +%F)" || echo "No changes to commit"
+          git push
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
