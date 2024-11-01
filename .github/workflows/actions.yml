@@ -2,7 +2,7 @@ name: Run Python Script and Save CSV
 
 on:
   schedule:
-    - cron: '06 16 * * *'  # Runs every day at midnight (adjust as needed)
+    - cron: '24 10 * * *'  # Runs every day at midnight (adjust as needed)
   workflow_dispatch:
 
 jobs:
