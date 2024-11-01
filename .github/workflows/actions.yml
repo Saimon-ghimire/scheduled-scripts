@@ -2,7 +2,7 @@ name: Run Python Script and Save CSV
 
 on:
   schedule:
-    - cron: '24 10 * * *'  # Runs every day at midnight (adjust as needed)
+    - cron: '*/2 * * * *'  # Runs every day at midnight (adjust as needed)
   workflow_dispatch:
 
 jobs:
@@ -26,7 +26,12 @@ jobs:
       - name: Install GeckoDriver for Firefox
         run: |
           sudo apt-get update
-          sudo apt-get install -y firefox-geckodriver
+          GECKODRIVER_VERSION="v0.35.0"  # Replace with the desired version
+          wget "https://github.com/mozilla/geckodriver/releases/download/${GECKODRIVER_VERSION}/geckodriver-${GECKODRIVER_VERSION}-linux64.tar.gz"
+          tar -xzf "geckodriver-${GECKODRIVER_VERSION}-linux64.tar.gz"
+          sudo mv geckodriver /usr/local/bin/  # Move geckodriver to a directory in PATH
+          sudo chmod +x /usr/local/bin/geckodriver  # Make it executable
+
 
       - name: Run Python Script
         env:
