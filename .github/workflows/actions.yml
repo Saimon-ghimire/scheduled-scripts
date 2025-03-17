@@ -1,8 +1,8 @@
 name: Run Python Script and Save CSV
-
-on:
-  schedule:
-    - cron: '43 11 * * *'  # Runs every day at midnight (adjust as needed)
+# uncomment three lines below to start scheduled script
+#on:
+#  schedule:
+#    - cron: '43 11 * * *'  # Runs every day at midnight (adjust as needed)
   workflow_dispatch:
 
 jobs:
